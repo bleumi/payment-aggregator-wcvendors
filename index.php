@@ -9,6 +9,35 @@
  * License:      Copyright 2020 Bleumi, MIT License
 */
 
+add_filter('wc_bleumi_process_payment', 'wc_wcv_bleumi_process_payment', 10, 2);
+function wc_wcv_bleumi_process_payment(&$order, &$params) {
+	$order_total = $order->get_total();
+	$split = array();
+
+	$vendors_due = WCV_Vendors::get_vendor_dues_from_order( $order);
+	$self_perc = 100;
+	foreach ( $vendors_due as $vendor_id => $commission ) {
+		if($vendor_id == 1) {
+			continue;
+		}
+		
+		$percentage = round($commission['total'] / $order_total, 4);
+		$self_perc = $self_perc - $percentage;
+
+		array_push($split, array(
+			'destination' => get_user_meta($vendor_id, 'wc_wcv_bleumi_vendor_id', true),
+			'percentage' => $percentage,
+		));
+	}
+
+	array_push($split, array(
+		'destination' => 'self',
+		'percentage' => $self_perc
+	));
+
+	$params['split'] = $split;
+}
+
 add_filter('woocommerce_available_payment_gateways', 'wc_wcv_bleumi_disable_unknown_vendor');
 function wc_wcv_bleumi_disable_unknown_vendor($gws) {
 	if (is_admin()) {
