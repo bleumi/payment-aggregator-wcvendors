@@ -27,6 +27,7 @@ To use this plugin with your WooCommerce store you will need:
 
 * WordPress(https://wordpress.org/) - tested from 4.9, tested up to 5.8.2
 * WooCommerce(https://wordpress.org/plugins/woocommerce/ - tested from 3.0.9, tested up to 5.9.0
+* Bleumi Payments(https://wordpress.org/plugins/bleumi-payments-for-woocommerce/) - tested from 1.0.8
 * WC Vendors Marketplace(https://wordpress.org/plugins/wc-vendors/) - tested from 2.3.2
 
 If you want to know if Bleumi supports your system or if you face any integration problem, please reach us at support@bleumi.com
