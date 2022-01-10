@@ -59,7 +59,11 @@ function wc_wcv_bleumi_disable_unknown_vendor($gws) {
 add_filter('edit_user_profile_update', 'wc_wcv_bleumi_save_vendor_id');
 function wc_wcv_bleumi_save_vendor_id($user_id) {
 	if ( isset( $_POST['wc_wcv_bleumi_vendor_id'] ) ) {
-		update_user_meta( $user_id, 'wc_wcv_bleumi_vendor_id', $_POST['wc_wcv_bleumi_vendor_id'] );
+		update_user_meta( 
+			$user_id, 
+			'wc_wcv_bleumi_vendor_id', 
+			sanitize_text_field($_POST['wc_wcv_bleumi_vendor_id'])
+		);
 	}
 }
 
@@ -72,7 +76,7 @@ function wc_wcv_bleumi_before_bank_details($user) { ?>
 			</label>
 		</th>
 		<td>
-			<input type="text" name="wc_wcv_bleumi_vendor_id" id="wc_wcv_bleumi_vendor_id" value="<?php echo get_user_meta( $user->ID, 'wc_wcv_bleumi_vendor_id', true ); ?>" class="regular-text">
+			<input type="text" name="wc_wcv_bleumi_vendor_id" id="wc_wcv_bleumi_vendor_id" value="<?php echo esc_attr(get_user_meta( $user->ID, 'wc_wcv_bleumi_vendor_id', true )); ?>" class="regular-text">
 		</td>
 	</tr>
 <?php }
