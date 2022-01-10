@@ -59,11 +59,10 @@ function wc_wcv_bleumi_disable_unknown_vendor($gws) {
 add_filter('edit_user_profile_update', 'wc_wcv_bleumi_save_vendor_id');
 function wc_wcv_bleumi_save_vendor_id($user_id) {
 	if ( isset( $_POST['wc_wcv_bleumi_vendor_id'] ) ) {
-		update_user_meta( 
-			$user_id, 
-			'wc_wcv_bleumi_vendor_id', 
-			sanitize_text_field($_POST['wc_wcv_bleumi_vendor_id'])
-		);
+		$bleumi_id = sanitize_text_field($_POST['wc_wcv_bleumi_vendor_id']);
+		if(!empty($bleumi_id) && !preg_match("/wallet:.+/i", $bleumi_id)) {
+			update_user_meta( $user_id, 'wc_wcv_bleumi_vendor_id', $bleumi_id );
+		}
 	}
 }
 
