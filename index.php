@@ -47,8 +47,8 @@ function wc_wcv_bleumi_disable_unknown_vendor($gws) {
 	foreach(WC()->cart->get_cart() as $item) {
 		$product_id = $item['product_id'];
 		$vendor_id = WCV_Vendors::get_vendor_from_product($product_id);
-		$bleumi_id = get_user_meta($vendor_id, 'wc_wcv_bleumi_vendor_id');
-		if(empty($bleumi_id)) {
+		$bleumi_id = get_user_meta($vendor_id, 'wc_wcv_bleumi_vendor_id', true);
+		if(empty($bleumi_id) || !preg_match("/wallet:.+/i", $bleumi_id)) {
 			unset($gws['bleumi']);
 		}
 	}
