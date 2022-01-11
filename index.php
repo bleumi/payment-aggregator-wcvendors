@@ -26,7 +26,7 @@ function wc_wcv_bleumi_process_payment(&$order, &$params) {
 			continue;
 		}
 		
-		$percentage = round($commission['total'] / $order_total, 4);
+		$percentage = round(($commission['total'] / $order_total) * 100, 4);
 		$self_perc = $self_perc - $percentage;
 
 		array_push($split, array(
