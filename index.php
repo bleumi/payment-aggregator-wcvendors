@@ -3,11 +3,16 @@
 /*
  * Plugin Name:  Bleumi Payments for WC Vendors Marketplace
  * Description:  Support split payments in Bleumi Payments for WC Vendors Marketplace
- * Version:      1.0.0
+ * Version:      1.0.2
  * Author:       Bleumi Inc
  * Author URI:   https://bleumi.com/
  * License:      Copyright 2020 Bleumi, MIT License
 */
+
+add_filter('wc_bleumi_complete_payment', 'wc_wcv_bleumi_complete_payment');
+function wc_wcv_bleumi_complete_payment($order_id) {
+	WCV_Commission::set_order_commission_paid($order_id);
+}
 
 add_filter('wc_bleumi_process_payment', 'wc_wcv_bleumi_process_payment', 10, 2);
 function wc_wcv_bleumi_process_payment(&$order, &$params) {
