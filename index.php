@@ -3,7 +3,7 @@
 /*
  * Plugin Name:  Bleumi Payments for WC Vendors Marketplace
  * Description:  Support split payments in Bleumi Payments for WC Vendors Marketplace
- * Version:      1.0.2
+ * Version:      1.0.3
  * Author:       Bleumi Inc
  * Author URI:   https://bleumi.com/
  * License:      Copyright 2020 Bleumi, MIT License
