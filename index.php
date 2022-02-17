@@ -3,7 +3,7 @@
 /*
  * Plugin Name:  Bleumi Payments for WC Vendors Marketplace
  * Description:  Support split payments in Bleumi Payments for WC Vendors Marketplace
- * Version:      1.0.3
+ * Version:      1.0.4
  * Author:       Bleumi Inc
  * Author URI:   https://bleumi.com/
  * License:      Copyright 2020 Bleumi, MIT License
@@ -51,7 +51,12 @@ function wc_wcv_bleumi_disable_unknown_vendor($gws) {
 
 	foreach(WC()->cart->get_cart() as $item) {
 		$product_id = $item['product_id'];
+		
 		$vendor_id = WCV_Vendors::get_vendor_from_product($product_id);
+		if ($vendor_id == 1) {
+			continue;
+		}
+		
 		$bleumi_id = get_user_meta($vendor_id, 'wc_wcv_bleumi_vendor_id', true);
 		if(empty($bleumi_id) || !preg_match("/wallet:.+/i", $bleumi_id)) {
 			unset($gws['bleumi']);
